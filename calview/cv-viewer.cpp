@@ -24,7 +24,7 @@
 
 #include "cv-viewer.h"
 #include "cv-tick.h"
-
+#include <calcoremodel.h>
 //----------------------------------------------------------------------------//
 // The one and only Viewer instance                                           //
 //----------------------------------------------------------------------------//
@@ -149,6 +149,7 @@ bool Viewer::onCreate(int argc, char *argv[])
 				std::cerr << "Specified two models!" << std::endl;
 				return false;
 			}
+			m_calCoreModel = new CalCoreModel();
 			CalLoader loader;
 			loader.loadCoreModel(m_calCoreModel, argv[++arg]);
 			if (m_calCoreModel == 0) {
@@ -166,6 +167,7 @@ bool Viewer::onCreate(int argc, char *argv[])
 				std::cerr << "Error in command line input. Expecting --mesh file1.cmf file2.csf" << std::endl;
 			}
 			else if (argv[arg + 1] && argv[arg + 2]) {
+				m_calCoreModel = new CalCoreModel();
 				CalLoader loader;
 				loader.loadCoreModel(m_calCoreModel, argv[++arg], argv[++arg]);
 				if (m_calCoreModel == 0) {
@@ -180,6 +182,7 @@ bool Viewer::onCreate(int argc, char *argv[])
 				std::cerr << "Specified two animations!" << std::endl;
 				return false;
 			}
+			m_calCoreAnimation = new CalCoreAnimation();
 			CalLoader loader;
 			loader.loadCoreAnimation(m_calCoreAnimation, argv[++arg]);
 			if (m_calCoreAnimation == 0) {
